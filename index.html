@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>제106회 부산 전국체육대회 D-day</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #222;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: relative;
+    }
+
+    .top-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px 30px 10px 30px;
+    }
+
+    .logo {
+      width: 100px;
+    }
+
+    .mascot {
+      width: 120px;
+    }
+
+    .title {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #003366;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #dday {
+      font-size: 18rem;
+      font-weight: bold;
+      color: #d12a83;
+      animation: pulse 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    footer img {
+      height: 160px;
+    }
+
+    /* 우측 상단 배너 */
+    .banner-container {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 728px;
+      height: 90px;
+    }
+
+    .banner-container img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .count-overlay {
+      position: absolute;
+      top: 28px;
+      right: 140px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #003366;
+      background-color: white;
+      padding: 6px 12px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+      font-family: 'Arial', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 우측 상단 디데이 배너 -->
+  <div class="banner-container">
+    <img src="A_promotional_digital_illustration_announces_the_1.png" alt="디데이 배너">
+    <div class="count-overlay" id="banner-dday">D-000</div>
+  </div>
+
+  <div class="top-section">
+    <img src="2025년_전국체전_엠블럼_컬러_-removebg-preview.png" alt="엠블럼" class="logo">
+    <div class="title">제106회 부산 전국체육대회</div>
+    <img src="2025년 전국_장애인체육대회 마스코트.png" alt="마스코트" class="mascot">
+  </div>
+
+  <div class="center">
+    <div id="dday">Loading...</div>
+  </div>
+
+  <footer>
+    <img src="SIGNA1.JPG" alt="하단 중앙 로고">
+  </footer>
+
+  <script>
+    const eventDate = new Date('2025-10-17T00:00:00+09:00');
+
+    function updateDday() {
+      const now = new Date();
+      const diff = eventDate - now;
+
+      let text = '';
+      if (diff <= 0) {
+        text = '🎉 D-DAY! 🎉';
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        text = `D-${days} (${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')})`;
+      }
+
+      document.getElementById('dday').textContent = text;
+      document.getElementById('banner-dday').textContent = text;
+    }
+
+    updateDday();
+    setInterval(updateDday, 1000);
+  </script>
+</body>
+</html>
