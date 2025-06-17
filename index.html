@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1680, initial-scale=1.0">
+  <title>D-Day 카운터</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url("파도.jpg") no-repeat center center;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+    .title {
+      margin-top: 30px;
+      font-size: 2.5rem;
+      color: white;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .content {
+      display: flex;
+      width: 100%;
+      height: 70%;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 100px;
+    }
+
+    .mascot {
+      max-height: 80%;
+    }
+
+    .speech-bubble {
+      position: relative;
+      background: white;
+      border-radius: 50px;
+      padding: 40px;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+      animation: none;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .speech-bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -30px;
+      left: 30%;
+      width: 0;
+      height: 0;
+      border: 20px solid transparent;
+      border-top-color: white;
+      border-bottom: 0;
+      margin-left: -10px;
+    }
+
+    .highlight {
+      animation: pulse 0.6s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .footer {
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      height: 60px;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+        padding: 0 20px;
+      }
+
+      .speech-bubble {
+        margin-top: 30px;
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">제106회 부산 전국체육대회 성공개최 기원</div>
+
+    <div class="content">
+      <img src="mascot.png" alt="마스코트" class="mascot">
+      <div id="ddayBox" class="speech-bubble">D-0</div>
+    </div>
+
+    <div class="footer">
+      <img src="SIGNA1.JPG" alt="부산광역시교육청 로고" class="logo">
+    </div>
+  </div>
+
+  <script>
+    function updateDday() {
+      const ddayBox = document.getElementById("ddayBox");
+      const targetDate = new Date("2025-10-17T00:00:00");
+      const now = new Date();
+      const diff = targetDate - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      ddayBox.innerHTML = `10월 17일<br>D-${days}`;
+
+      // 애니메이션 적용
+      ddayBox.classList.remove("highlight");
+      void ddayBox.offsetWidth; // 재생성을 위한 리플로우 트릭
+      ddayBox.classList.add("highlight");
+    }
+
+    updateDday();
+    setInterval(updateDday, 1000);
+  </script>
+</body>
+</html>
